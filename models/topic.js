@@ -1,10 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
-   return sequelize.define('topics', {
+   return sequelize.define('topic', {
       id: DataTypes.INTEGER,    
       title: DataTypes.STRING,    
       description: DataTypes.TEXT,    
-      understood: DataTypes.FLOAT
+      understood: DataTypes.FLOAT,
       reviews: DataTypes.ARRAY(DataTypes.Date),
+      toplevel: DataTypes.INTEGER,    
       parent_topic: DataTypes.INTEGER,    
       sub_topics: DataTypes.ARRAY(DataTypes.INTEGER),
       images: DataTypes.ARRAY(DataTypes.INTEGER)

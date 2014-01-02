@@ -1,22 +1,25 @@
-drop table users;
-drop table projects;
-CREATE TABLE users (
+drop table topics;
+drop table top_levels;
+drop table images;
+CREATE TABLE top_levels (
     id serial primary key,
     name varchar(255),
-    password varchar(255),
-    projects int[]
+    type varchar(255),
+    topics int[],
+    understood float
 );
-CREATE TABLE projects (
+CREATE TABLE topics (
     id serial primary key,
-    name varchar(255),
-    top_level_object int,
-    users int[]
+    title varchar(255),
+    description text,
+    understood float,
+    reviews date[],
+    toplevel int,
+    parent_topic int,
+    sub_topics int[],
+    images int[]
 );
-CREATE TABLE permissions (
+CREATE TABLE images (
     id serial primary key,
-    user int,
-    project int,
-    read boolean,
-    write boolean,
-    admin boolean
+    data bytea
 );

@@ -1,0 +1,43 @@
+include learn_title 
+
+mixin no_topics_message()
+    div#no-topics There are no topics.
+
+mixin new_topic_bar()
+    div#new-topic-bar
+        input(type="text" id="new-topic-input" size=60)
+        input(type="submit" name="new_topic_button" value="New Topic" onclick="create_new_topic()")
+
+mixin post_new_topic_script()
+    script.
+        function create_new_topic() {
+            var title = $("#new-topic-input").val();
+            console.log("title=" + title);
+            var posting = $.post("/topic/new",{ title:title, toplevel:#{toplevel.id}, parent_topic:null });
+
+            posting.done(function(data,status) {
+                console.log("POST /topic/new success.");
+            });
+            posting.fail(function(jqxhr,status,error_message) {
+                console.log("POST /topic/new failed.");
+            });
+        }
+
+
+doctype 5
+html(lang="en")
+    head
+        title #{toplevel.type} #{toplevel.name}
+        link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/top_level.css")
+        script(src="/javascripts/jquery-1.10.2.min.js")
+        +post_new_topic_script()
+    body
+        +toplevel_title(toplevel.type,toplevel.name)
+        br
+        +new_topic_bar()
+        br
+        br
+        if topics == null
+            +no_topics_message()
+

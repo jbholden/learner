@@ -1,0 +1,32 @@
+include learn_title
+
+doctype 5
+html(lang="en")
+    head
+        title Edit Toplevel Object
+        link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/edit_top_level.css")
+    body
+        +learn_title()
+        form(action="/toplevel/#{data.id}/edit",method="post")
+            div#title Edit a TopLevel Object
+            br
+            table
+                tr
+                    td#input-label Type
+                    td
+                        input(type="text" id="text-input" name="type_input" size=20 value="#{data.type}")
+                tr
+                    td#input-label Name
+                    td
+                        input(type="text" id="text-input" name="name_input" size=40,value="#{data.name}")
+                tr
+                    td#input-label Understood %
+                    td
+                        input(type="text" id="text-input" name="understood_input" size=40,value="#{data.understood}")
+            table
+                tr
+                    td
+                        input(type="submit" name="submit_form" value="Submit")
+                    td
+                        input(type="submit" name="cancel_form" value="Cancel")

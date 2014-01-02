@@ -1,0 +1,24 @@
+doctype 5
+html(lang="en")
+    head
+        title New Toplevel Object
+        link(rel="stylesheet" type="text/css" href="/stylesheets/new_top_level.css")
+    body
+        form(action="/toplevel/new",method="post")
+            div#title Create a New TopLevel Object
+            br
+            table
+                tr
+                    td#input-label Type
+                    td
+                        input(type="text" id="text-input" name="type_input" size=20 value="Class")
+                tr
+                    td#input-label Name
+                    td
+                        input(type="text" id="text-input" name="name_input" size=40)
+            table
+                tr
+                    td
+                        input(type="submit" name="submit_form" value="Submit")
+                    td
+                        input(type="submit" name="cancel_form" value="Cancel")

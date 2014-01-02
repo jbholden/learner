@@ -1,0 +1,38 @@
+include learn_title 
+
+mixin display_understood(value)
+    if value > 66.666
+        td#understood-green #{value}%
+    else if value > 33.333
+        td#understood-orange #{value}%
+    else
+        td#understood-red #{value}%
+
+mixin display_name(toplevel)
+    td#name 
+        a(id="name-link" href="/toplevel/#{toplevel.id}/page") #{toplevel.name}
+
+mixin display_edit_delete(toplevel)
+    td#edit
+        a(id="edit-link" href="/toplevel/#{toplevel.id}/edit") edit
+    td#delete
+        a(id="delete-link" href="/toplevel/#{toplevel.id}/delete") delete
+
+doctype 5
+html(lang="en")
+    head
+        title Learn
+        link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/main.css")
+    body
+        +learn_title()
+        input(type="submit" name="new_button" value="New" onclick="window.location.href=\"/toplevel/new\"")
+        br
+        br
+        table
+            each toplevel in data
+                tr
+                    td#type #{toplevel.type}
+                    +display_name(toplevel)
+                    +display_understood(toplevel.understood)
+                    +display_edit_delete(toplevel)

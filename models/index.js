@@ -18,8 +18,8 @@ var sequelize = new Sequelize('learndb','postgres', 'nodejs', {
 
 var models = [
   'top_level',
-  'topics',
-  'images'
+  'topic',
+  'image'
 ];
 
 models.forEach(function(model) {

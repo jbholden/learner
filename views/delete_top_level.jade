@@ -1,0 +1,23 @@
+include learn_title
+
+doctype 5
+html(lang="en")
+    head
+        title Delete Toplevel Object
+        link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/delete_top_level.css")
+    body
+        +learn_title()
+        form(action="/toplevel/#{data.id}/delete",method="post")
+            div#title Are you sure you want to delete this item?
+            br
+            div#toplevel-info
+                span#type #{data.type}
+                span#name #{data.name}
+            br
+            table
+                tr
+                    td
+                        input(type="submit" name="delete_form" value="Delete")
+                    td
+                        input(type="submit" name="cancel_form" value="Cancel")

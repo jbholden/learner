@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-   return sequelize.define('images', {
+   return sequelize.define('image', {
       id: DataTypes.INTEGER,    
       data: DataTypes.BLOB
   }, {

@@ -13,7 +13,7 @@ mixin post_new_topic_script()
         function create_new_topic() {
             var title = $("#new-topic-input").val();
             console.log("title=" + title);
-            var posting = $.post("/topic/new",{ title:title, toplevel:#{toplevel.id}, parent_topic:null });
+            var posting = $.post("/topic/new",{ title:title, toplevel:#{toplevel.id} });
 
             posting.done(function(data,status) {
                 console.log("POST /topic/new success.");
@@ -22,6 +22,12 @@ mixin post_new_topic_script()
                 console.log("POST /topic/new failed.");
             });
         }
+
+mixin display_topics()
+    table
+        each topic in topics 
+            tr
+                td topic.title
 
 
 doctype 5
@@ -40,4 +46,7 @@ html(lang="en")
         br
         if topics == null
             +no_topics_message()
+        else
+            +display_topics()
+
 

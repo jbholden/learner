@@ -1,0 +1,38 @@
+include learn_title 
+
+mixin content_type()
+    div#content-type 
+        span#content-label content type
+        select(id="content-select" name="content_type")
+            option plain text
+            option html
+
+mixin description()
+    div#description
+        div#description-title Description
+        textarea(name="description" rows="20" cols="80")
+
+mixin submit_cancel_buttons()
+    table
+        tr
+            td
+                input(type="submit" name="submit_form" value="Submit")
+            td
+                input(type="submit" name="cancel_form" value="Cancel")
+
+doctype 5
+html(lang="en")
+    head
+        title #{toplevel.type} #{toplevel.name}
+        link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/edit_topic.css")
+    body
+        +topic_title(toplevel.type,toplevel.name,topic.title)
+        br
+        form(action="/topic/#{topic.id}/edit",method="post")
+            +content_type()
+            br
+            +description()
+            br
+            +submit_cancel_buttons()
+

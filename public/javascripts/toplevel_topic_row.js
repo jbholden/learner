@@ -1,0 +1,4 @@
+function toplevel_topic_row(locals) {
+var buf = [];
+var locals_ = (locals || {}),topic_id = locals_.topic_id,topic_title = locals_.topic_title;buf.push("<tr id=\"topic-row\"><td id=\"vertical-bar\"></td><td id=\"topic-title-cell\"> <a" + (jade.attrs({ 'id':("topic-title"), 'href':("/topic/" + (topic_id) + "/page") }, {"id":true,"href":true})) + ">" + (jade.escape((jade.interp = topic_title) == null ? '' : jade.interp)) + "</a></td><td> <div" + (jade.attrs({ 'id':("understood_button_" + (topic_id) + ""), 'onclick':("understand_clicked(this," + (topic_id) + ")"), "class": [("understood-button")] }, {"class":true,"id":true,"onclick":true})) + ">0% understood</div></td><td><div" + (jade.attrs({ 'id':("review_button_" + (topic_id) + ""), 'onclick':("review_clicked(this," + (topic_id) + ")"), "class": [("review-button")] }, {"class":true,"id":true,"onclick":true})) + ">0 reviews</div></td><tr><td id=\"table-line\" colspan=\"4\"></td></tr></tr>");;return buf.join("");
+}

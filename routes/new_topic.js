@@ -6,108 +6,6 @@ exports.post = function(req, res){
     }
 
     create_new_topic(req,res,info,update_parent);
-
-
-   // TODO:  parseInt error handling
-
-   var topic_model = res.locals.models.topic;
-
-   var fields_to_save = null;
-   var topic = null;
-
-   topic = topic_model.build({ title:topic_title, toplevel:parseInt(toplevel_id), understood:0.0});
-   fields_to_save = ['title','toplevel','understood'];
-   console.log("parent_topic_id=" + parent_topic_id);
-   console.log("parent_topic_id==null" + (parent_topic_id==null));
-   parent_topic_id = null;
-
-   /*if (parent_topic_id == null) {
-       topic = topic_model.build({ title:topic_title, toplevel:parseInt(toplevel_id), understood:0.0});
-       fields_to_save = ['title','toplevel','understood'];
-   } else {
-       topic = topic_model.build({ title:topic_title, toplevel:parseInt(toplevel_id), understood:0.0, parent_topic:parseInt(parent_topic_id)});
-       fields_to_save = ['title','toplevel','understood', 'parent_topic'];
-   }*/
-
-   topic.save(fields_to_save).complete(function(err,new_topic) {
-       if (err) {
-         console.log("error creating a new topic object: " + err);
-         res.status(400);
-         res.send();
-       } else {
-         update_parent();
-         //res.status(200);
-         //res.send();
-       }
-   });
-
-   function update_parent() {
-       var parent_is_topic = parent_topic_id != null;
-
-       if (parent_is_topic) {
-           update_topic_parent();
-       } else {
-           update_toplevel_parent();
-       }
-   }
-
-   function update_toplevel_parent() {
-      var toplevel_model = res.locals.models.top_level;
-      toplevel_model.find({where:{id:new_topic.toplevel}}).complete(modify_toplevel_parent);
-   }
-
-   function update_topic_parent() {
-      topic_model.find({where:{id:new_topic.parent_topic}}).complete(modify_topic_parent);
-   }
-
-   function modify_toplevel_parent(err,toplevel) {
-       if (err) {
-         console.log("error getting the toplevel object: " + err);
-         res.status(400);
-         res.send();
-       } else {
-           if (toplevel.topics == null) {
-               toplevel.topics = [new_topic.id];
-           } else {
-               toplevel.topics.push(new_topic.id);
-           }
-
-           toplevel.save(['topics']).complete(function(err) {
-               if (err) {
-                   console.log("error saving the toplevel object: " + err);
-                   res.status(400);
-                   res.send();
-               }
-               res.status(200);
-               res.send();
-           });
-       }
-   }
-
-   function modify_topic_parent(err,parent_topic) {
-       if (err) {
-         console.log("error getting the parent topic: " + err);
-         res.status(400);
-         res.send();
-         return;
-       }
-
-       if (toplevel.topics == null) {
-          parent_topic.sub_topics = [new_topic.id];
-       } else {
-          parent_topic.sub_topics.push(new_topic.id);
-       }
-       parent_topic.save(['sub_topics']).complete(function(err) {
-            if (err) {
-                console.log("error saving the parent topic object: " + err);
-                res.status(400);
-                res.send();
-                return;
-            }
-            res.status(200);
-            res.send();
-       });
-   }
 }
 
 function get_page_parameters_and_check_for_errors(req,res) {
@@ -142,7 +40,7 @@ function get_page_parameters_and_check_for_errors(req,res) {
     info.parent_is_topic = parent_topic_id != null;
     info.title = topic_title
     info.toplevel_id = toplevel_id
-    info.parent_topic = parent_topic_id
+    info.parent_topic_id = parent_topic_id
 
     if (info.parent_is_topic) {
         if (int_type_error(parent_topic_id)) {
@@ -249,7 +147,7 @@ function update_toplevel_parent(req,res,info,new_topic) {
                 return;
             }
             res.status(200);
-            res.send();
+            res.send({topic_id:new_topic.id});
         });
     });
 }
@@ -280,7 +178,7 @@ function update_topic_parent(req,res,info,new_topic) {
                 return;
             }
             res.status(200);
-            res.send();
+            res.send({topic_id:new_topic.id});
         });
     });
 }

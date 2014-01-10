@@ -1,0 +1,3 @@
+../node_modules/jade/bin/jade --client --no-debug toplevel_topic_row.jade
+sed -i "" "s/anonymous/toplevel_topic_row/" toplevel_topic_row.js
+mv toplevel_topic_row.js ../public/javascripts/.

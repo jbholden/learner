@@ -7,6 +7,7 @@ mixin new_topic_bar()
     div#new-topic-bar
         input(type="text" id="new-topic-input" size=60)
         input(type="submit" id="new-topic-button" value="New Topic" onclick="create_new_topic()")
+        a(id="edit-topic-link" href="/topic/#{topic.id}/edit") edit this topic
 
 mixin status_bar()
     div#status-bar
@@ -29,7 +30,7 @@ mixin post_new_topic_script()
             $("#new-topic-input").val("");
 
             change_status("Creating a new topic","green");
-            var posting = $.post("/topic/new",{ title:title, toplevel:#{toplevel.id} });
+            var posting = $.post("/topic/new",{ title:title, toplevel:#{toplevel.id}, parent_topic:#{topic.id} });
 
             posting.done(function(data,status) {
                 change_status("New topic created.","gray");
@@ -162,9 +163,9 @@ mixin display_topics_with_subtopics()
 doctype 5
 html(lang="en")
     head
-        title #{toplevel.type} #{toplevel.name}
+        title Topic #{topic.title}
         link(rel="stylesheet" type="text/css" href="/stylesheets/title.css")
-        link(rel="stylesheet" type="text/css" href="/stylesheets/top_level.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/topic.css")
         script(src="/javascripts/jquery-1.10.2.min.js")
         script(src="/javascripts/runtime.js")
         script(src="/javascripts/toplevel_topic_row.js")
@@ -174,12 +175,11 @@ html(lang="en")
         +handle_review_button_script()
         +initialize_colors_script()
     body
-        +toplevel_title(toplevel.type,toplevel.name)
+        +topic_title(toplevel.type,toplevel.name,topic.title)
         br
         +new_topic_bar()
         br
         +status_bar()
-        br
         br
         if no_topics
             +no_topics_message()

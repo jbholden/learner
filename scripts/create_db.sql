@@ -11,9 +11,10 @@ CREATE TABLE top_levels (
 CREATE TABLE topics (
     id serial primary key,
     title varchar(255),
+    content_type varchar(255),
     description text,
     understood float,
-    reviews date[],
+    reviews bigint[],
     toplevel int,
     parent_topic int,
     sub_topics int[],

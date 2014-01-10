@@ -1,0 +1,22 @@
+body {
+   color : black;
+   font-family: Helvetica;
+   font-weight: 100;
+   font-size: 10pt;
+}
+#title {
+   color : blue;
+   font-weight: 500;
+   font-size: 12pt;
+}
+#input-label {
+   color : black;
+   font-size: 10pt;
+   width: 8em;
+}
+#text-input {
+   color : black;
+   font-family: Helvetica;
+   font-weight: 100;
+   font-size: 10pt;
+}

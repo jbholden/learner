@@ -1,0 +1,10 @@
+tr#topic-row
+    td#vertical-bar
+    td#topic-title-cell 
+        a(id="topic-title" href="/topic/#{topic_id}/page") #{topic_title}
+    td 
+        div(class="understood-button" id="understood_button_#{topic_id}" onclick="understand_clicked(this,#{topic_id})") 0% understood
+    td
+        div(class="review-button" id="review_button_#{topic_id}" onclick="review_clicked(this,#{topic_id})") 0 reviews
+    tr
+        td(id="table-line" colspan=4)

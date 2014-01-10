@@ -1,0 +1,30 @@
+body {
+   color : black;
+   font-family: Helvetica;
+   font-weight: 100;
+   font-size: 10pt;
+}
+#table-line {
+    border-bottom: 1px solid lightgray;
+    padding: 0 0 0 0; 
+}
+#input-label {
+    color : blue;
+    font-size : 8pt;
+    padding: 4px 4px;
+}
+#content-label {
+    color : gray;
+    font-size : 8pt;
+    padding: 4px 4px;
+}
+#content-select {
+    color : black;
+    font-size : 8pt;
+    padding: 4px 4px;
+}
+#description-title {
+    color : gray;
+    font-size : 8pt;
+    padding: 4px 4px;
+}

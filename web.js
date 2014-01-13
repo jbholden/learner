@@ -57,6 +57,7 @@ app.post('/topic/new',load_model,new_topic.post);
 app.post('/topic/:id/update',load_model,update_topic.post);
 app.get('/topic/:id/page',load_model,topic_page.get);
 app.get('/topic/:id/edit',load_model,edit_topic.get);
+app.post('/topic/:id/edit',load_model,edit_topic.post);
 app.get('/topic/:id/json',load_model,topic_json.get);
 //app.get('/:year/results', load_model, overall_results.get);
 

@@ -19,7 +19,8 @@ mixin input_topic_data()
         tr
             td#input-label Reviews
             td
-                textarea(id="reviews-input" name="reviews" rows="5" cols="30" value="#{topic.reviews}")
+                textarea(id="reviews-input" name="reviews" rows="5" cols="30") #{topic_reviews}
+
         tr
             td(id="table-line" colspan=2)
         tr
@@ -31,19 +32,28 @@ mixin input_topic_data()
         tr
             td#input-label Parent Topic Id
             td
-                input(type="text" id="parent-topic-input" name="parent_topic_input" size=4 value="#{topic.parent_topic}")
+                if topic.parent_topic == null
+                    input(type="text" id="parent-topic-input" name="parent_topic_input" size=4 value="")
+                else
+                    input(type="text" id="parent-topic-input" name="parent_topic_input" size=4 value="#{topic.parent_topic}")
         tr
             td(id="table-line" colspan=2)
         tr
             td#input-label Sub Topic Ids
             td
-                input(type="text" id="subtopics-input" name="subtopics_input" size=40 value="#{topic.sub_topics}")
+                if topic.sub_topics == null
+                    input(type="text" id="subtopics-input" name="subtopics_input" size=40 value="")
+                else
+                    input(type="text" id="subtopics-input" name="subtopics_input" size=40 value="#{topic.sub_topics}")
         tr
             td(id="table-line" colspan=2)
         tr
             td#input-label Image Ids
             td
-                input(type="text" id="images-input" name="images_input" size=40 value="#{topic.images}")
+                if topic.images == null
+                    input(type="text" id="images-input" name="images_input" size=40 value="")
+                else
+                    input(type="text" id="images-input" name="images_input" size=40 value="#{topic.images}")
         tr
             td(id="table-line" colspan=2)
 
